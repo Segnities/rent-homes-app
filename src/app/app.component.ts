@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,4 +11,7 @@ import { HomeComponent } from './home/home.component';
   imports: [HomeComponent]
 })
 export class AppComponent {
+  dragStartEvent(e: DragEvent) {
+    e.preventDefault();
+  }
 }
