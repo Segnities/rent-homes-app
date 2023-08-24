@@ -4,7 +4,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { HousingService } from '../housing.service';
-import { Housinglocation } from '../housinglocation';
+import { Housinglocation } from '../types/housinglocation';
 
 @Component({
   selector: 'app-details',
@@ -17,7 +17,7 @@ export class DetailsComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingLocationId = -1;
   housingService = inject(HousingService);
-  housingLocation:Housinglocation | undefined;
+  housingLocation: Housinglocation | undefined;
 
   applyForm = new FormGroup({
     firstName: new FormControl(''),
@@ -35,7 +35,7 @@ export class DetailsComponent implements OnInit {
     this.housingService.submitApplicationForm(
       this.applyForm.value.firstName ?? '',
       this.applyForm.value.lastName ?? '',
-      this.applyForm.value.email ?? ''      
+      this.applyForm.value.email ?? ''
     );
   }
 

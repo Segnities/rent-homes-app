@@ -1,11 +1,16 @@
 <section>
-    <form>
-        <input type="text" placeholder="Filter by city" />
-        <button class="primary" type="button">Search</button>
+    <form class="search-form">
+        <input type="text" placeholder="Filter by city" #search/>
+        <button class="primary" type="button" (click)="filteredResults(search.value)">Search</button>
+        <select name="filter-list" id="filter-by" #filter (change)="changeFilterBy(filter.value)" aria-label="Filter by">
+            <option value="city" selected>City</option>
+            <option value="state">State</option>
+            <option value="name">Name</option>
+        </select>
     </form>
 </section>
 
 <section class="results">
-    <app-housing-location *ngFor="let housingLocation of housingLocationList" [housingLocation]="housingLocation">
+    <app-housing-location *ngFor="let housingLocation of filtredLocationList" [housingLocation]="housingLocation">
     </app-housing-location>
 </section>

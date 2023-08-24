@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 
 import { HousingService } from '../housing.service';
-import { Housinglocation } from '../housinglocation';
+import type { Housinglocation } from '../types/housinglocation';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +15,40 @@ import { Housinglocation } from '../housinglocation';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent {
-    housingLocationList:Housinglocation[] = [];
-    housingService:HousingService = inject(HousingService); 
+export class HomeComponent implements OnInit {
+  housingLocationList: Housinglocation[] = [];
+  housingService: HousingService = inject(HousingService);
+  filtredLocationList: Housinglocation[] = [];
 
-    constructor() {
-      this.housingLocationList = this.housingService.getAllHousingLocations();
+  filterBy: 'city' | 'state' | 'name' = 'city';
+
+  constructor() {
+    this.housingLocationList = this.housingService.getAllHousingLocations();
+  }
+
+  ngOnInit(): void {
+    if (!this.filtredLocationList.length) {
+      this.filtredLocationList = this.housingLocationList;
     }
+  }
+
+  changeFilterBy(value: string) {
+    if (
+      value === 'city' ||
+      value === 'state' ||
+      value === 'name'
+    ) {
+      this.filterBy = value;
+
+    }
+  }
+
+  filteredResults(text: string) {
+    if (!text) {
+      this.filtredLocationList = this.housingLocationList;
+    }
+
+
+    this.filtredLocationList = this.housingLocationList.filter(location => location?.[this.filterBy].toLowerCase().includes(text.toLowerCase()));
+  }
 } 

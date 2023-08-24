@@ -7,6 +7,13 @@
     justify-content: space-around;
 }
 
+select {
+    border: solid 1px var(--primary-color);
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: 6px;
+}
+
 input[type="text"] {
     border: solid 1px var(--primary-color);
     padding: 10px;
@@ -31,6 +38,12 @@ button {
 
     input[type="text"] {
         width: 70%;
+    }
+}
+
+@media (max-width: 772px) {
+    .search-bar {
+        width: 100%;
     }
 }
 
