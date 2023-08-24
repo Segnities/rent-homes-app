@@ -7,6 +7,10 @@ import { Housinglocation } from './housinglocation';
 export class HousingService {
   readonly baseUrl = "https://angular.io/assets/images/tutorials/faa";
 
+  submitApplicationForm(firstName: string, lastName: string, email: string) {
+    console.log('RECIEVED \nFirstname: ' + firstName + '\nLastname: ' + lastName + '\nEmail: ' + email);
+  }
+
   private _housingLocationList: Housinglocation[] = [
     {
       id: 0,
@@ -109,10 +113,10 @@ export class HousingService {
       laundry: true
     }
   ];
-  getAllHousingLocations():Housinglocation[] {
+  getAllHousingLocations(): Housinglocation[] {
     return this._housingLocationList;
   }
-  getHousingLocationById(id:number):Housinglocation | undefined{
+  getHousingLocationById(id: number): Housinglocation | undefined {
     return this._housingLocationList.find(location => location.id === id);
   }
 }

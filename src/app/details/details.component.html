@@ -12,5 +12,18 @@
             <li>Does location have a laundry: {{housingLocation?.laundry ? 'Yes' : 'No'}}</li>
         </ul>
     </section>
+    <section class="listing-apply">
+        <h2 class="section-heading">Apply now here</h2>
+        <form [formGroup]="applyForm" (submit)="submitForm()">
+            <label for="first-name">First Name</label>
+            <input id="first-name" formControlName="firstName" type="text"/>
 
+            <label for="last-name">Last Name</label>
+            <input id="last-name" formControlName="lastName" type="text" />
+
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" />
+            <button type="submit">Apply now</button>
+        </form>
+    </section>
 </article>
