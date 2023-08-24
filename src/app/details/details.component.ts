@@ -25,10 +25,13 @@ export class DetailsComponent implements OnInit {
     email: new FormControl(''),
   });
 
-
   constructor() {
-    this.housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingLocation = this.housingService.getHousingLocationById(this.housingLocationId);
+    const housingLocationId = Number(this.route.snapshot.params['id'])
+    this.housingLocationId = housingLocationId;
+    this.housingService.getHousingLocationById(housingLocationId).then((housingLocation: Housinglocation | undefined) => {
+      this.housingLocation = housingLocation;
+
+    }).finally(() => console.log(this.housingLocation));
   }
 
   submitForm() {

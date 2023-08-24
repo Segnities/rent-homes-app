@@ -15,7 +15,7 @@ import type { Housinglocation } from '../types/housinglocation';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   housingLocationList: Housinglocation[] = [];
   housingService: HousingService = inject(HousingService);
   filtredLocationList: Housinglocation[] = [];
@@ -23,15 +23,11 @@ export class HomeComponent implements OnInit {
   filterBy: 'city' | 'state' | 'name' = 'city';
 
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations();
+    this.housingService.getAllHousingLocations().then((housingLocationList: Housinglocation[]) => {
+      this.housingLocationList = housingLocationList;
+      this.filtredLocationList = housingLocationList;
+    });
   }
-
-  ngOnInit(): void {
-    if (!this.filtredLocationList.length) {
-      this.filtredLocationList = this.housingLocationList;
-    }
-  }
-
   changeFilterBy(value: string) {
     if (
       value === 'city' ||
